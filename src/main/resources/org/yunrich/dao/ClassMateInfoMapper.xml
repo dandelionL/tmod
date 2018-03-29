@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yunrich.dao.ClassMateInfoMapper">
+  <resultMap id="BaseResultMap" type="org.yunrich.model.ClassMateInfo">
+    <id column="STU_ID" jdbcType="CHAR" property="stuId" />
+    <result column="WX_OPER_ID" jdbcType="VARCHAR" property="wxOperId" />
+    <result column="STU_NAME" jdbcType="VARCHAR" property="stuName" />
+    <result column="BIRTHDAY" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="PROV_ID" jdbcType="CHAR" property="provId" />
+    <result column="AREA_ID" jdbcType="CHAR" property="areaId" />
+    <result column="WORK_FLAG" jdbcType="CHAR" property="workFlag" />
+    <result column="COM_NAME" jdbcType="VARCHAR" property="comName" />
+    <result column="SELF_FLAG" jdbcType="CHAR" property="selfFlag" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    STU_ID, WX_OPER_ID, STU_NAME, BIRTHDAY, PROV_ID, AREA_ID, WORK_FLAG, COM_NAME, SELF_FLAG
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from class_mate_info
+    where STU_ID = #{stuId,jdbcType=CHAR}
+  </select>
+ 
+  <insert id="insert" parameterType="org.yunrich.model.ClassMateInfo">
+    insert into class_mate_info (STU_ID, WX_OPER_ID, STU_NAME, 
+      BIRTHDAY, PROV_ID, AREA_ID, 
+      WORK_FLAG, COM_NAME, SELF_FLAG
+      )
+    values (#{stuId,jdbcType=CHAR}, #{wxOperId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{provId,jdbcType=CHAR}, #{areaId,jdbcType=CHAR}, 
+      #{workFlag,jdbcType=CHAR}, #{comName,jdbcType=VARCHAR}, #{selfFlag,jdbcType=CHAR}
+      )
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="org.yunrich.model.ClassMateInfo">
+    update class_mate_info
+    <set>
+      <if test="wxOperId != null">
+        WX_OPER_ID = #{wxOperId,jdbcType=VARCHAR},
+      </if>
+      <if test="stuName != null">
+        STU_NAME = #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="provId != null">
+        PROV_ID = #{provId,jdbcType=CHAR},
+      </if>
+      <if test="areaId != null">
+        AREA_ID = #{areaId,jdbcType=CHAR},
+      </if>
+      <if test="workFlag != null">
+        WORK_FLAG = #{workFlag,jdbcType=CHAR},
+      </if>
+      <if test="comName != null">
+        COM_NAME = #{comName,jdbcType=VARCHAR},
+      </if>
+      <if test="selfFlag != null">
+        SELF_FLAG = #{selfFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where STU_ID = #{stuId,jdbcType=CHAR}
+  </update>
+</mapper>
