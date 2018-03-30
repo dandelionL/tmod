@@ -18,7 +18,7 @@
         </commentGenerator>  
           
         <!-- jdbc连接 -->  
-        <jdbcConnection driverClass="${jdbc_driverClassName}"  
+        <jdbcConnection driverClass="${jdbc_driver}"  
             connectionURL="${jdbc_url}" userId="${jdbc_username}"  
             password="${jdbc_password}" />  
           
